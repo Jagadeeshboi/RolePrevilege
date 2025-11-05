@@ -30,7 +30,7 @@ const roles=mongoose.model("roles",rolesSchema);
 const moduleSchema=new mongoose.Schema({
     moduleName: { type: String, required: false, unique: true },
     status: { type: String, default: "Active", required: false },
-        priveleages: [{ type: mongoose.Schema.Types.ObjectId, ref: "priveleages" }],
+    priveleages: [{ type: mongoose.Schema.Types.ObjectId, ref: "priveleages" }],
     
 },
   { timestamps: true })
