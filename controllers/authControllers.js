@@ -1,7 +1,11 @@
 const bcrypt = require('bcryptjs');
+const { organisationadmin } = require('../models/organisationAdminModel');
 module.exports = {
     signIn: async (req, res) => {
         try {
+        //      const hashedPassword = await bcrypt.hash("Admin@123", 12);
+        //  await organisationadmin.create({  email:"admin@analogueitsolutionz.com", password: hashedPassword });
+       
             const { email, password } = req.body;
             if (!email || !password) {
                 req.flash("email or password required");
