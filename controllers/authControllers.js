@@ -7,30 +7,35 @@ module.exports = {
         //  await organisationadmin.create({  email:"admin@analogueitsolutionz.com", password: hashedPassword });
        
             const { email, password } = req.body;
+            console.log(email, password)
             if (!email || !password) {
-                req.flash("email or password required");
+                req.flash("error", "email or password required");
                 return res.redirect('/signin');
             }
-            const userExist = await organiZation.find({ emai });
+            const userExist = await organisationadmin.findOne({ email });
             if (!userExist) {
-                req.flash("user not found");
+                req.flash("error", "user not found");
                 return res.redirect('/signin');
             }
             const ispasswordValid = await bcrypt.compare(password, userExist.password)
             if (!ispasswordValid) {
-                req.flash("password is invalid");
+                req.flash("error", "password is invalid");
                 return res.redirect('/signin')
             }
+            req.flash("success", "successfully login")
             return res.redirect('/dashboard');
         } catch (error) {
             console.error('Error occurred:', error.message);
-            req.flash("internal server error");
+            req.flash("error", "internal server error");
             return res.redirect('/signin');
         }
     },
     renderSignIn: async (req, res) => {
         try {
-            res.render("index");
+            return res.render("index", {
+                success: req.flash("success"),
+                error: req.flash("error")
+            });
         } catch (error) {
             console.error('Error occurred:', error.message);
             return res.redirect('/admin/v1/dashboard');
