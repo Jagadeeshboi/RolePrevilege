@@ -22,6 +22,13 @@ module.exports = {
         }
       }
 
+       if (!status && !(["Active", "Inactive"].includes(status))) {
+        return res
+            .status(400)
+            .json({ message: "Invalid module ID,pls chekc" });
+        
+      }
+
       const existingRole = await roles.findOne({ roleName });
       if (existingRole) {
         return res.status(400).json({ message: "role already there." });
@@ -110,16 +117,16 @@ module.exports = {
     try {
       const allRoles = await roles
         .find()
-        .populate("modules")
-        // .populate({
-        //   path: "modules",
-        //   populate: {
-        //     path: "priveleages",
-        //     populate: {
-        //       path: "slug",
-        //     },
-        //   },
-        // })
+        // .populate("modules")
+        .populate({
+          path: "modules",
+          populate: {
+            path: "priveleages",
+            populate: {
+              path: "slug",
+            },
+          },
+        })
         .sort({ createdAt: -1 });
 
       return res.status(200).json({
@@ -140,19 +147,17 @@ module.exports = {
         return res.status(400).json({ message: "iinvalid role id" });
       }
 
-      const role = await roles.findById(roleId).populate("modules");
-      //   .populate({
-      //     path: "modules",
-      //     select: "moduleName status privileges",
-      //     populate: {
-      //       path: "privileges",
-      //       select: "privilegeName status slug",
-      //       populate: {
-      //         path: "slug",
-      //         select: "name slugName status",
-      //       },
-      //     },
-      //   });
+      const role = await roles.findById(roleId)
+    //   populate("modules");
+       .populate({
+          path: "modules",
+          populate: {
+            path: "priveleages",
+            populate: {
+              path: "slug",
+            },
+          },
+        });
 
       if (!role) {
         return res.status(404).json({ message: "role not there." });
