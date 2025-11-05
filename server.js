@@ -12,6 +12,7 @@ const connectDB = require("./config/dbConnect.js");
 const authRoute = require("./routes/authRoute.js");
 const adminRoute = require("./routes/adminRoute.js");
 const rolesRouter = require("./routes/rolesRouter.js");
+const privileageRouter = require("./routes/priveleageRoutes.js");
 // const registerHelpers = require("./helpers/helpers.js");
 // const errorHandler = require("./middleWare/errorHandler.js");
 
@@ -68,6 +69,7 @@ hbs.registerPartials(path.join(__dirname, "views", "partials"));
 app.use("/", authRoute);
 app.use("/", adminRoute);
 app.use("/admin",rolesRouter);
+app.use("/privileages",privileageRouter);
 
 // Global error handler middleware (MUST be at the end)
 // app.use(errorHandler);
