@@ -9,6 +9,7 @@ const mongoDBSession = require("connect-mongodb-session")(expressSession);
 require("dotenv").config();
 
 const connectDB = require("./config/dbConnect.js");
+const authRoute = require("./routes/authRoute.js");
 // const registerHelpers = require("./helpers/helpers.js");
 // const errorHandler = require("./middleWare/errorHandler.js");
 
@@ -58,8 +59,11 @@ app.use(express.static(path.join(__dirname, "uploads")));
 
 app.use('/uploads', express.static(path.join(__dirname, "uploads")));
 hbs.registerPartials(path.join(__dirname, "views", "partials"));
+app.use("/", async (req, res) => {
+    res.redirect("/signIn")
+})
 
-
+app.use("/", authRoute);
 
 // Global error handler middleware (MUST be at the end)
 // app.use(errorHandler);
