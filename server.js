@@ -9,8 +9,8 @@ const mongoDBSession = require("connect-mongodb-session")(expressSession);
 require("dotenv").config();
 
 const connectDB = require("./config/dbConnect.js");
-const registerHelpers = require("./helpers/helpers.js");
-const errorHandler = require("./middleWare/errorHandler.js");
+// const registerHelpers = require("./helpers/helpers.js");
+// const errorHandler = require("./middleWare/errorHandler.js");
 
 
 
@@ -18,7 +18,7 @@ const app = express();
 
 
 connectDB();
-registerHelpers();
+// registerHelpers();
 
 const store = new mongoDBSession({
     uri: process.env.MONGO_URI,
@@ -61,11 +61,8 @@ hbs.registerPartials(path.join(__dirname, "views", "partials"));
 
 
 
-
-//front-desk routes here
-
 // Global error handler middleware (MUST be at the end)
-app.use(errorHandler);
+// app.use(errorHandler);
 
 app.listen(process.env.PORT, async (req, res) => {
     console.log(`Server listening to port....${process.env.PORT}`);
