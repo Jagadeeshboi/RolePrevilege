@@ -10,6 +10,7 @@ require("dotenv").config();
 
 const connectDB = require("./config/dbConnect.js");
 const authRoute = require("./routes/authRoute.js");
+const adminRoute = require("./routes/adminRoute.js");
 // const registerHelpers = require("./helpers/helpers.js");
 // const errorHandler = require("./middleWare/errorHandler.js");
 
@@ -59,11 +60,12 @@ app.use(express.static(path.join(__dirname, "uploads")));
 
 app.use('/uploads', express.static(path.join(__dirname, "uploads")));
 hbs.registerPartials(path.join(__dirname, "views", "partials"));
-app.use("/", async (req, res) => {
-    res.redirect("/signIn")
-})
+// app.use("/", async (req, res) => {
+//     return res.render("index")
+// })
 
 app.use("/", authRoute);
+app.use("/", adminRoute);
 
 // Global error handler middleware (MUST be at the end)
 // app.use(errorHandler);
