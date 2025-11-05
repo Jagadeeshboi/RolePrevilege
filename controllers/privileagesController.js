@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const { priveleages, slug } = require("../models/organisationAdminModel");
 
 module.exports = {
-
   createPrivileage: async (req, res) => {
     try {
       const { priveleageName, slugIds, status } = req.body;
@@ -20,10 +19,8 @@ module.exports = {
           return res.status(400).json({ message: "Invalid slug id" });
         }
       }
-   if (status) {
-
+      if (status) {
         if (status === "Active" || status === "Inactive") {
-        
         } else {
           return res.status(400).json({
             message: "Invalid status. allowed values are Active&Inactive",
@@ -32,13 +29,15 @@ module.exports = {
       }
       const existingPriv = await priveleages.findOne({ priveleageName });
       if (existingPriv) {
-        return res.status(400).json({ message: "this prievileage already exists" });
+        return res
+          .status(400)
+          .json({ message: "this prievileage already exists" });
       }
 
       const newPriv = await priveleages.create({
         priveleageName,
         slug: slugIds,
-        status: status||"Active"
+        status: status || "Active",
       });
 
       return res.status(201).json({
@@ -65,7 +64,6 @@ module.exports = {
         return res.status(404).json({ message: "privilege not there." });
       }
 
-
       if (priveleageName) {
         const existingPrivileage = await priveleages.findOne({
           priveleageName,
@@ -81,8 +79,8 @@ module.exports = {
 
       if (Array.isArray(slugIds)) {
         for (const id of slugIds) {
-            const checkSlugId=await slug.findOne({_id:id});
-             if (!checkSlugId) {
+          const checkSlugId = await slug.findOne({ _id: id });
+          if (!checkSlugId) {
             return res.status(400).json({ message: "iinvalid slug id" });
           }
           if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -93,9 +91,7 @@ module.exports = {
       }
 
       if (status) {
-
         if (status === "Active" || status === "Inactive") {
-        
         } else {
           return res.status(400).json({
             message: "Invalid status. allowed values are Active&Inactive",
@@ -114,7 +110,6 @@ module.exports = {
     }
   },
 
- 
   getAllPrivileages: async (req, res) => {
     try {
       const allPrivileages = await priveleages
