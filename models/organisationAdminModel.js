@@ -50,7 +50,7 @@ const priveleages = new mongoose.model("priveleages", privelagesSchema);
 const slugSchema = new mongoose.Schema({
   name: { type: String, required: false, unique: true },
   slugName: { type: String, required: false, unique: true },
-  status: [{ type: String, default: "Active", required: false }],
+  status: { type: String, default: "active", enum: ["active", "Inactive"], required: false },
 
 },
   { timestamps: true })

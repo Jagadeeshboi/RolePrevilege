@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { roles,modules} = require("../models/organisationAdminModel");
+const { roles, modules } = require("../models/organisationAdminModel");
 
 module.exports = {
   createRole: async (req, res) => {
@@ -81,14 +81,14 @@ module.exports = {
       console.log(moduleIds);
       if (Array.isArray(moduleIds)) {
         for (const id of moduleIds) {
-             if (!mongoose.Types.ObjectId.isValid(id)) {
+          if (!mongoose.Types.ObjectId.isValid(id)) {
             return res
               .status(400)
               .json({ message: "Invalid module ids ,pls check module ids" });
           }
-            const checkModuleId=await modules.findOne({_id:id});
-            console.log(checkModuleId);
-          if (!checkModuleId ) {
+          const checkModuleId = await modules.findOne({ _id: id });
+          console.log(checkModuleId);
+          if (!checkModuleId) {
             return res
               .status(400)
               .json({ message: "Invalid module ids ,pls check module ids" });
@@ -97,7 +97,7 @@ module.exports = {
 
         role.modules = moduleIds;
       }
- console.log(role.modules);
+      console.log(role.modules);
       if (status && ["Active", "Inactive"].includes(status)) {
         role.status = status;
       }

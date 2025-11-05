@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/admin/images/logo.png" type="image/x-icon">
+    <title>{{title}}</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/admin/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/admin/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/admin/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/admin/css/adminlte.min.css">
+    <link rel="stylesheet" href="/admin/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-LC/U0QNwBE2Afb3tQ8E7tZ4DlN9sBEZ2L4a9xv2tHc8egP3Wqas76qQV4DEtvU2n" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+    <!---tailwind--->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3/dist/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var currentUrl = window.location.pathname;
+
+            $('.nav-sidebar a').each(function () {
+                var linkUrl = $(this).attr('href');
+                if (currentUrl === linkUrl) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            const currentPath = window.location.pathname;
+            $('.nav-link').each(function () {
+                if ($(this).attr('href') === currentPath) {
+                    $(this).addClass('active');
+                    $(this).closest('.nav-item.has-treeview').addClass('menu-open');
+                }
+            });
+        });
+
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        tfoot {
+            display: none;
+        }
+
+        .btn-primary {
+            background-color: white;
+        }
+
+        [class*="sidebar-dark-"] .sidebar a {
+            color: #000;
+        }
+
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #000000;
+            background-color: rgb(255, 255, 255);
+            border-color: #ffffff;
+        }
+
+        .page-item .page-link {
+            color: black;
+        }
+
+        .active-tab {
+            background-color: rgb(255, 255, 255);
+            color: #000000;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            color: #ffffff;
+            background-color: rgb(0, 0, 0);
+        }
+
+        .custom-map-control-button {
+            padding: 14px;
+        }
+
+        .sidebar-dark-primary {
+            background-color: #ffffff;
+        }
+
+
+        .nav-item a p {
+            color: white;
+        }
+
+        .nav-item:hover {
+            background-color: #d8ebe0;
+            color: #3b9d64;
+            border-bottom: 2px solid white;
+        }
+
+        .sidebar {
+            padding-top: 2px;
+            padding-bottom: 30px;
+            background-color: rgb(112, 42, 33);
+
+        }
+
+        .brand-image {
+            border-bottom: 1px solid black;
+        }
+
+        .buttons-html5 {
+            padding: 5px 8px !important;
+        }
+
+        .btn {
+            margin-bottom: 3px;
+        }
+
+        .bg-info {
+            background-color: black !important;
+            color: white !important;
+        }
+
+        .btn-success {
+            background-color: #5c1414;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #ffffff;
+            color: white;
+            border-color: black;
+        }
+
+        .col-sm-6 h1 {
+            color: white !important;
+        }
+
+        .custom-logo-color {
+            color: rgb(255, 255, 255);
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 300px;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            background-color: #323232;
+            color: #ffffff;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s, fadeOut 0.5s 3s;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .toast.success {
+            background-color: #4CAF50;
+        }
+
+        .toast.error {
+            background-color: #f44336;
+        }
+
+        .toast.warning {
+            background-color: #ff9800;
+        }
+
+        .toast.info {
+            background-color: #2196F3;
+        }
+
+        .toast .toast-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+
+        .toast .toast-message {
+            flex-grow: 1;
+            font-size: 1em;
+        }
+
+        .toast .close-btn {
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0 10px;
+        }
+
+        .toast.success {
+            display: none;
+        }
+
+        .toast.error {
+            display: none;
+        }
+
+        .toast.warning {
+            display: none;
+        }
+
+        .toast.info {
+            display: none;
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
+        .toast.success {
+            background-color: #4CAF50;
+            /* Green for success */
+        }
+
+        .toast.error {
+            background-color: #f44336;
+            /* Red for error */
+        }
+
+        .toast.warning {
+            background-color: #ff9800;
+            /* Orange for warning */
+        }
+
+        .toast.info {
+            background-color: #2196F3;
+            /* Blue for info */
+        }
+
+        .toast {
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            /* Initially hidden */
+            align-items: center;
+            gap: 10px;
+            transition: opacity 0.3s ease;
+        }
+
+        .has-treeview {
+            background-color: white !important;
+            color: green !important;
+        }
+
+        .has-treeview>a:hover {
+            background-color: #d8ebe0 !important;
+            color: green !important;
+        }
+
+        .has-treeview.active,
+        .has-treeview:focus {
+            background-color: #d8ebe0;
+            color: #0B9444;
+        }
+
+        .sidebar .active {
+            background-color: #22c55e !important;
+            color: white !important;
+        }
+
+        .sidebar .active i {
+            color: #fff !important;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed bg-[#f5f8fb] ">
+    <div class="toast-container" id="toast-container">
+        <div class="toast success" style="background-color: #4CAF50;">
+            <div class="toast-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="toast-message">Success! Your action was successful.</div>
+            <div class="close-btn" onclick="closeToast(this)">&times;</div>
+        </div>
+        <div class="toast error" style="background-color: #f44336;">
+            <div class="toast-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <div class="toast-message">Error! Something went wrong.</div>
+            <div class="close-btn" onclick="closeToast(this)">&times;</div>
+        </div>
+        <div class="toast warning">
+            <div class="toast-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="toast-message">Warning! Please be careful.</div>
+            <div class="close-btn" onclick="closeToast(this)">&times;</div>
+        </div>
+        <div class="toast info">
+            <div class="toast-icon"><i class="fas fa-info-circle"></i></div>
+            <div class="toast-message">Info! Here is some information for you.</div>
+            <div class="close-btn" onclick="closeToast(this)">&times;</div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <nav
+            class="main-header navbar flex justify-between navbar-expand navbar-light bg-white border border-b-gray-300">
+            <ul class="navbar-nav">
+                <li class="">
+                    <a class="nav-link humburger-menu" data-widget="pushmenu" href="#" role="button"><i
+                            class="fas fa-bars" style="color: #4CAF50; font-size:x-large"></i></a>
+                </li>
+            </ul>
+            <div class="flex gap-6 items-center">
+                <div>
+                    <h1 class="text-semibold">Welcome admin</h1>
+                    <p id="time" class=" text-sm"></p>
+                </div>
+                <div class="relative pr-3">
+                    <a class="cursor-pointer" id="profile"><i class="fa fa-user-circle text-[30px] text-green-500"
+                            aria-hidden="true" title="profile"></i></a>
+                    <div id="dropdown"
+                        class="z-10 absolute hidden right-2 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                            aria-labelledby="dropdownDefaultButton">
+                            <li>
+                                <a href="/admin/v1/profile"
+                                    class="block px-4 py-2 hover:bg-gray-100 hover:text-green-800 dark:hover:bg-green-600 dark:hover:text-white">Profile</a>
+                            </li>
+                            <li>
+                                <a href="/admin/v1/logout"
+                                    class="block px-4 py-2 hover:bg-gray-100 hover:text-green-800 dark:hover:bg-green-600 dark:hover:text-white">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <aside class="main-sidebar sidebar-dark-primary elevation-4"
+            style="background-color: rgb(221, 221, 221); border-right: 2px solid r0C1836">
+            <div class="border-b border-r border-gray-200 bg-white">
+                <a href="/admin/v1/dashboard" id="logo"
+                    style="padding:10px;border-radius:15px; display:flex; justify-content:center; align-items:center">
+                    <img src="/admin/images/logo.png" alt="Logo" style="margin-top: 1px; border-radius: 5px; width:50%">
+                </a>
+            </div>
+            <div class="sidebar" style="background-color:white">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item">
+                            <a href="/admin/v1/dashboard" class="nav-link">
+                                <i style="margin-left: 5px; color: green" class="fa fa-pie-chart"
+                                    aria-hidden="true"></i>
+                                <p style="margin-left: 5px; color: green; font-family: 'Lato'">Dashboard</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+
+        <div class="content-wrapper p-2 mb-2">

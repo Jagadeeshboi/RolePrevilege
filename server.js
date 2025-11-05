@@ -68,8 +68,8 @@ hbs.registerPartials(path.join(__dirname, "views", "partials"));
 
 app.use("/", authRoute);
 app.use("/", adminRoute);
-app.use("/admin",rolesRouter);
-app.use("/privileages",privileageRouter);
+app.use("/admin", rolesRouter);
+app.use("/privileages", privileageRouter);
 
 // Global error handler middleware (MUST be at the end)
 // app.use(errorHandler);
