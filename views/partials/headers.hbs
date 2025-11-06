@@ -389,7 +389,24 @@
                                 <p style="margin-left: 5px; color: green; font-family: 'Lato'">Dashboard</p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="/admin/v1/dashboard" class="nav-link">
+                                <i style="margin-left: 5px; color: green" class="fa fa-pie-chart"
+                                    aria-hidden="true"></i>
+                                <p style="margin-left: 5px; color: green; font-family: 'Lato'">Assign Role</p>
+                            </a>
+                        </li>
+                        {{#each moduleExist}}
+                        <li class="nav-item">
+                            <a href="/admin/v1/dashboard" class="nav-link">
+                                <i style="margin-left: 5px; color: green" class="fa fa-pie-chart"
+                                    aria-hidden="true"></i>
+                                <p
+                                    style="margin-left: 5px; color: green; font-family: 'Lato';text-transform:capitalize;">
+                                    {{this.moduleName}}</p>
+                            </a>
+                        </li>
+                        {{/each}}
                     </ul>
                 </nav>
             </div>

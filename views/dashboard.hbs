@@ -54,14 +54,15 @@
                 <div class="modal fade" id="moduleModel" tabindex="-1" aria-labelledby="whatsAppModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered ">
-                        <form style="padding: 12px;" action="#" class="card sms-card bg-white modal-content ">
+                        <form style="padding: 12px;" action="/modules" method="post"
+                            class="card sms-card bg-white modal-content ">
                             <button class="close-btn">&times;</button>
                             <h5 class="mb-4 fw-semibold">Create Module</h5>
 
                             <div class="row mb-3">
                                 <div class="col-6">
                                     <label class="form-label">Module Name</label>
-                                    <input type="type" name="remainderCredits" class="form-control" value="0">
+                                    <input type="type" name="moduleName" class="form-control">
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label">Status</label>
@@ -83,8 +84,119 @@
 
                 </div>
 
+                <div class="modal fade" id="roleModel" tabindex="-1" aria-labelledby="whatsAppModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered ">
+                        <form style="padding: 12px;" method="post" action="/admin/roles"
+                            class="card sms-card bg-white modal-content ">
+                            <button class="close-btn">&times;</button>
+                            <h5 class="mb-4 fw-semibold">Create Module</h5>
+
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label class="form-label">Role Name</label>
+                                    <input type="type" name="roleName" class="form-control">
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label">Select Module</label>
+                                    <select class="form-control" name="moduleIds">
+                                        {{#each moduleExist}}
+                                        <option value="{{this._id}}" class="form-control"
+                                            style="text-transform: capitalize;">
+                                            {{this.moduleName}}
+                                        </option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label">Status</label>
+                                    <select name="status" class="form-control">
+                                        <option value="active">active</option>
+                                        <option value="inactive">in active</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-right align-items-right gap-3">
+                                <button class="btn btn-clear px-4" role="button"
+                                    style="background-color: blue; padding:10px 20px; border:1px solid grey; margin-bottom:6px;color:white;border:none;border-radius:5px">Clear
+                                    All</button>
+                                <button type="submit" class="btn btn-save px-4" role="button"
+                                    style="background-color: blue; padding:10px 20px; border:1px solid grey; margin-bottom:6px;color:white;border:none;border-radius:5px">Save</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="modal fade" id="privilegeModel" tabindex="-1" aria-labelledby="whatsAppModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered ">
+                        <form style="padding: 12px;" action="/privileages/create" method="post"
+                            class="card sms-card bg-white modal-content ">
+                            <button class="close-btn">&times;</button>
+                            <h5 class="mb-4 fw-semibold">Create Module</h5>
+
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label class="form-label">Privilege Name</label>
+                                    <input type="type" name="priveleageName" class="form-control">
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label">Select Slug</label>
+                                    <select name="slugIds">
+                                        <option value="">Lowde</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-3">
+                                    <label class="form-label">Status</label>
+                                    <select name="status" class="form-control">
+                                        <option value="active">active</option>
+                                        <option value="inactive">in active</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-right align-items-right gap-3">
+                                <button class="btn btn-clear px-4" role="button"
+                                    style="background-color: blue; padding:10px 20px; border:1px solid grey; margin-bottom:6px;color:white;border:none;border-radius:5px">Clear
+                                    All</button>
+                                <button type="submit" class="btn btn-save px-4" role="button"
+                                    style="background-color: blue; padding:10px 20px; border:1px solid grey; margin-bottom:6px;color:white;border:none;border-radius:5px">Save</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
                 <!-- Tabs Content -->
                 <div class="tab-content" id="bookingTabsContent">
+                    <div class="tab-pane fade" id="roles" role="tabpanel" aria-labelledby="roles-tab">
+                        <div style="display: flex;justify-content:right;align-items:center">
+                            <button role="button" data-bs-toggle="modal" data-bs-target="#roleModel"
+                                style="background-color: blue; padding:10px 20px; border:1px solid grey; margin-bottom:6px;color:white;border:none;border-radius:5px">Create
+                                Role</button>
+
+                        </div>
+                        <div id="example2_wrapper">
+                            <div class="row">
+                                <div class="col-sm-12 table-responsive">
+                                    <table id="upcomingBookingsTable" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No</th>
+                                                <th>Role Name</th>
+                                                <th>Module</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- All Bookings Tab -->
                     <div class="tab-pane fade show active" id="allBookings" role="tabpanel" aria-labelledby="all-tab">
                         <div style="display: flex;justify-content:right;align-items:center">
@@ -100,41 +212,23 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>User Name</th>
-                                                <th>Date</th>
-                                                <th>Booking Id</th>
-                                                <th>Pickup Time</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Baggage</th>
-                                                <th>Pickup Location</th>
-                                                <th>Driver Email</th>
-                                                <th>Driver Phone</th>
-                                                <th>Booking Status</th>
-                                                <th>Update Status</th>
+                                                <th>Module Name</th>
+                                                <th>Privileges</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{#each allBookings}}
+                                            {{#each moduleExist}}
                                             <tr>
-                                                <td>{{sum @index 1}}</td>
-                                                <td>{{#if this.name}}{{this.name}}{{else}}{{this.userId.name}}{{/if}}
-                                                </td>
-                                                <td>{{newFormatDate this.date}}</td>
-                                                <td>{{this._id}}</td>
-                                                <td>{{this.pickUpTimings}}</td>
-                                                <td>{{this.email}}</td>
-                                                <td>{{#if
-                                                    this.phoneNumber}}{{this.phoneNumber}}{{else}}{{this.userId.phoneNumber}}{{/if}}
-                                                </td>
-                                                <td>{{this.baggageCount}}</td>
-                                                <td>{{this.pickUpLocation}}</td>
-                                                <td>{{this.driverDetails.email}}</td>
-                                                <td>{{this.driverDetails.phoneNumber}}</td>
-                                                <td style="text-transform: capitalize;">{{this.bookingStatus}}</td>
-                                                <td>{{this.updateStatus}}</td>
+                                                <td>{{inc @index}}</td>
+                                                <td>{{this.moduleName}}</td>
+                                                <td>...</td>
+                                                {{#each this.priveleages}}
+                                                <td>..</td>
+                                                {{/each}}
+                                                <td>{{this.status}}</td>
+                                                {{/each}}
                                             </tr>
-                                            {{/each}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -144,6 +238,12 @@
 
                     <!-- Upcoming Bookings Tab -->
                     <div class="tab-pane fade" id="upcomingBookings" role="tabpanel" aria-labelledby="upcoming-tab">
+                        <div style="display: flex;justify-content:right;align-items:center">
+                            <button role="button" data-bs-toggle="modal" data-bs-target="#privilegeModel"
+                                style="background-color: blue; padding:10px 20px; border:1px solid grey; margin-bottom:6px;color:white;border:none;border-radius:5px">Create
+                                Privileges</button>
+
+                        </div>
                         <div id="example2_wrapper">
                             <div class="row">
                                 <div class="col-sm-12 table-responsive">
@@ -151,45 +251,16 @@
                                         <thead>
                                             <tr>
                                                 <th>S.No</th>
-                                                <th>User Name</th>
-                                                <th>Date</th>
-                                                <th>Booking Id</th>
-                                                <th>Pickup Time</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Baggage</th>
-                                                <th>Pickup Location</th>
-                                                <th>Driver Email</th>
-                                                <th>Driver Phone</th>
-                                                <th>Booking Status</th>
-                                                <th>Update Status</th>
+                                                <th>Privileges Name</th>
+                                                <th>Slugs</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{#each allBookings}}
-                                            {{#if (upcomming this.date)}}
-                                            <tr>
-                                                <td>{{sum @index 1}}</td>
-                                                <td>{{#if this.name}}{{this.name}}{{else}}{{this.userId.name}}{{/if}}
-                                                </td>
-                                                <td>{{#if (eql this.date "N/A")}}{{newFormatDate
-                                                    this.date}}{{else}}{{newFormatDate
-                                                    this.date}}{{/if}}</td>
-                                                <td>{{this._id}}</td>
-                                                <td>{{this.pickUpTimings}}</td>
-                                                <td>{{this.email}}</td>
-                                                <td>{{#if
-                                                    this.phoneNumber}}{{this.phoneNumber}}{{else}}{{this.userId.phoneNumber}}{{/if}}
-                                                </td>
-                                                <td>{{this.baggageCount}}</td>
-                                                <td>{{this.pickUpLocation}}</td>
-                                                <td>{{this.driverDetails.email}}</td>
-                                                <td>{{this.driverDetails.phoneNumber}}</td>
-                                                <td>{{this.bookingStatus}}</td>
-                                                <td>{{this.updateStatus}}</td>
-                                            </tr>
-                                            {{/if}}
-                                            {{/each}}
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tbody>
                                     </table>
                                 </div>
@@ -197,59 +268,7 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane fade" id="roles" role="tabpanel" aria-labelledby="roles-tab">
-                        <div id="example2_wrapper">
-                            <div class="row">
-                                <div class="col-sm-12 table-responsive">
-                                    <table id="upcomingBookingsTable" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>S.No</th>
-                                                <th>User Name</th>
-                                                <th>Date</th>
-                                                <th>Booking Id</th>
-                                                <th>Pickup Time</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Baggage</th>
-                                                <th>Pickup Location</th>
-                                                <th>Driver Email</th>
-                                                <th>Driver Phone</th>
-                                                <th>Booking Status</th>
-                                                <th>Update Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{#each allBookings}}
-                                            {{#if (upcomming this.date)}}
-                                            <tr>
-                                                <td>{{sum @index 1}}</td>
-                                                <td>{{#if this.name}}{{this.name}}{{else}}{{this.userId.name}}{{/if}}
-                                                </td>
-                                                <td>{{#if (eql this.date "N/A")}}{{newFormatDate
-                                                    this.date}}{{else}}{{newFormatDate
-                                                    this.date}}{{/if}}</td>
-                                                <td>{{this._id}}</td>
-                                                <td>{{this.pickUpTimings}}</td>
-                                                <td>{{this.email}}</td>
-                                                <td>{{#if
-                                                    this.phoneNumber}}{{this.phoneNumber}}{{else}}{{this.userId.phoneNumber}}{{/if}}
-                                                </td>
-                                                <td>{{this.baggageCount}}</td>
-                                                <td>{{this.pickUpLocation}}</td>
-                                                <td>{{this.driverDetails.email}}</td>
-                                                <td>{{this.driverDetails.phoneNumber}}</td>
-                                                <td>{{this.bookingStatus}}</td>
-                                                <td>{{this.updateStatus}}</td>
-                                            </tr>
-                                            {{/if}}
-                                            {{/each}}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

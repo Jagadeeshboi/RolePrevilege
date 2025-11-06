@@ -8,13 +8,12 @@ adminRoute.post("/modules", controllers.createModule)
     .patch("/modules/:id", controllers.updateModules)
 
 adminRoute.get("/dashboard", controllers.dashboard)
-    .get("/roles", controllers.roles);
 
 adminRoute.post("/slugs", controllers.slugCreation)
     .patch("/slugs", controllers.upadteSlug);
 
 
-adminRoute.get("/rendermodules",controllers.renderAllModules);
-adminRoute.get("/singlemodule",controllers.renderIndividualModule);
+adminRoute.get("/rendermodules", controllers.renderAllModules);
+adminRoute.get("/singlemodule", controllers.renderIndividualModule);
 
 module.exports = adminRoute

@@ -22,11 +22,11 @@ module.exports = {
         }
       }
 
-       if (!status && !(["Active", "Inactive"].includes(status))) {
+      if (!status && !(["Active", "Inactive"].includes(status))) {
         return res
-            .status(400)
-            .json({ message: "Invalid module ID,pls chekc" });
-        
+          .status(400)
+          .json({ message: "Invalid module ID,pls chekc" });
+
       }
 
       const existingRole = await roles.findOne({ roleName });
@@ -148,8 +148,8 @@ module.exports = {
       }
 
       const role = await roles.findById(roleId)
-    //   populate("modules");
-       .populate({
+        //   populate("modules");
+        .populate({
           path: "modules",
           populate: {
             path: "priveleages",
@@ -198,48 +198,45 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
-    renderAllRoles: async (req, res) => {
-        try {
-            const allRoles=await this.roles.find({});
-            if(!allRoles)
-            {
-                req.flash("error","Cannot Fetch Roles");
-                return res.redirect("/admin/v1/dashboard");
-            }
-            return res.render("allRroles",
-                {
-                    success: req.flash("error"),
-                    error: req.flash("error"),
-                    allRoles
-                })
-        } catch (error) {
-            console.error(error.message);
-            return res.redirect('/admin/v1/dashboard');
-        }
-    },
-     renderIndividualRole: async (req, res) => {
-        try {
-            const {roleId}=req.params;
-            if(!roleId)
-            {
-               req.flash("error","Please Enter Valid Role Id.");
-                return res.redirect("/admin/v1/dashboard");
-            }
-            const singleRole=await this.roles.findById({_id:roleId});
-            if(!singleRole)
-            {
-                req.flash("error","Cannot Fetch the Role");
-                return res.redirect("/admin/v1/dashboard");
-            }
-            return res.render("singleRole",
-                {
-                    success: req.flash("error"),
-                    error: req.flash("error"),
-                    allRoles
-                })
-        } catch (error) {
-            console.error(error.message);
-            return res.redirect('/admin/v1/dashboard');
-        }
+  renderAllRoles: async (req, res) => {
+    try {
+      const allRoles = await this.roles.find({});
+      if (!allRoles) {
+        req.flash("error", "Cannot Fetch Roles");
+        return res.redirect("/admin/v1/dashboard");
       }
+      return res.render("allRroles",
+        {
+          success: req.flash("error"),
+          error: req.flash("error"),
+          allRoles
+        })
+    } catch (error) {
+      console.error(error.message);
+      return res.redirect('/admin/v1/dashboard');
+    }
+  },
+  renderIndividualRole: async (req, res) => {
+    try {
+      const { roleId } = req.params;
+      if (!roleId) {
+        req.flash("error", "Please Enter Valid Role Id.");
+        return res.redirect("/admin/v1/dashboard");
+      }
+      const singleRole = await this.roles.findById({ _id: roleId });
+      if (!singleRole) {
+        req.flash("error", "Cannot Fetch the Role");
+        return res.redirect("/admin/v1/dashboard");
+      }
+      return res.render("singleRole",
+        {
+          success: req.flash("error"),
+          error: req.flash("error"),
+          allRoles
+        })
+    } catch (error) {
+      console.error(error.message);
+      return res.redirect('/admin/v1/dashboard');
+    }
+  }
 };

@@ -4,7 +4,9 @@ const { render } = require("../routes/authRoute");
 module.exports = {
     dashboard: async (req, res) => {
         try {
+            const moduleExist = await modules.find({});
             res.render("dashboard", {
+                moduleExist,
                 success: req.flash("error"),
                 error: req.flash("error")
             })
@@ -24,6 +26,8 @@ module.exports = {
                 return res.status(403).json({ message: "Module is already exists" })
             }
             const module = await modules.create({ moduleName, status });
+            req.flash("success", "Created successfully")
+            return res.redirect("/dashboard")
             return res.status(200).json({ message: "module is created", module })
         } catch (error) {
             console.error('Error occurred:', error.message);
@@ -90,48 +94,45 @@ module.exports = {
         }
     },
 
-        renderAllModules: async (req, res) => {
-            try {
-                const getAllModules=await this.modules.find({});
-                if(!getAllModules)
-                {
-                    req.flash("error","Cannot Fetch Modules");
-                    return res.redirect("/admin/v1/dashboard");
-                }
-                return res.render("allModules",
-                    {
-                        success: req.flash("error"),
-                        error: req.flash("error"),
-                        getAllModules
-                    })
-            } catch (error) {
-                console.error(error.message);
-                return res.redirect('/admin/v1/dashboard');
+    renderAllModules: async (req, res) => {
+        try {
+            const getAllModules = await this.modules.find({});
+            if (!getAllModules) {
+                req.flash("error", "Cannot Fetch Modules");
+                return res.redirect("/admin/v1/dashboard");
             }
-        },
-         renderIndividualModule: async (req, res) => {
-            try {
-                const {moduleId}=req.params;
-                if(!moduleId)
+            return res.render("allModules",
                 {
-                   req.flash("error","Please Enter Valid Module Id.");
-                    return res.redirect("/admin/v1/dashboard");
-                }
-                const singleModule=await this.modules.findById({_id:moduleId});
-                if(!singleModule)
-                {
-                    req.flash("error","Cannot Fetch the Module");
-                    return res.redirect("/admin/v1/dashboard");
-                }
-                return res.render("singleModule",
-                    {
-                        success: req.flash("error"),
-                        error: req.flash("error"),
-                        singleModule
-                    })
-            } catch (error) {
-                console.error(error.message);
-                return res.redirect('/admin/v1/dashboard');
+                    success: req.flash("error"),
+                    error: req.flash("error"),
+                    getAllModules
+                })
+        } catch (error) {
+            console.error(error.message);
+            return res.redirect('/admin/v1/dashboard');
+        }
+    },
+    renderIndividualModule: async (req, res) => {
+        try {
+            const { moduleId } = req.params;
+            if (!moduleId) {
+                req.flash("error", "Please Enter Valid Module Id.");
+                return res.redirect("/admin/v1/dashboard");
             }
-          }
+            const singleModule = await this.modules.findById({ _id: moduleId });
+            if (!singleModule) {
+                req.flash("error", "Cannot Fetch the Module");
+                return res.redirect("/admin/v1/dashboard");
+            }
+            return res.render("singleModule",
+                {
+                    success: req.flash("error"),
+                    error: req.flash("error"),
+                    singleModule
+                })
+        } catch (error) {
+            console.error(error.message);
+            return res.redirect('/admin/v1/dashboard');
+        }
+    }
 }
