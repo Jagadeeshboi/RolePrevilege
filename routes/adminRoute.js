@@ -13,7 +13,7 @@ adminRoute.post("/slugs", controllers.slugCreation)
     .patch("/slugs", controllers.upadteSlug);
 
 
-adminRoute.get("/rendermodules",controllers.renderAllModules);
-adminRoute.get("/singlemodule",controllers.renderIndividualModule);
+adminRoute.get("/rendermodules", controllers.renderAllModules);
+adminRoute.get("/singlemodule", controllers.renderIndividualModule);
 
 module.exports = adminRoute

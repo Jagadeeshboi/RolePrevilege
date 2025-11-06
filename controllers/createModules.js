@@ -4,7 +4,9 @@ const { render } = require("../routes/authRoute");
 module.exports = {
     dashboard: async (req, res) => {
         try {
+            const moduleExist = await modules.find({});
             res.render("dashboard", {
+                moduleExist,
                 success: req.flash("error"),
                 error: req.flash("error")
             })
@@ -24,6 +26,8 @@ module.exports = {
                 return res.status(403).json({ message: "Module is already exists" })
             }
             const module = await modules.create({ moduleName, status });
+            req.flash("success", "Created successfully")
+            return res.redirect("/dashboard")
             return res.status(200).json({ message: "module is created", module })
         } catch (error) {
             console.error('Error occurred:', error.message);

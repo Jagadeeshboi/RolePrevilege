@@ -14,16 +14,14 @@ const adminRoute = require("./routes/adminRoute.js");
 const rolesRouter = require("./routes/rolesRouter.js");
 const privileageRouter = require("./routes/priveleageRoutes.js");
 const settingsRouter = require("./routes/settingsRouter.js");
-// const registerHelpers = require("./helpers/helpers.js");
+const registerHelpers = require("./helpers/helpers.js");
 // const errorHandler = require("./middleWare/errorHandler.js");
-
-
 
 const app = express();
 
 
 connectDB();
-// registerHelpers();
+registerHelpers();
 
 const store = new mongoDBSession({
     uri: process.env.MONGO_URI,
