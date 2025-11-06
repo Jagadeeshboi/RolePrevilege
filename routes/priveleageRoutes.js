@@ -7,4 +7,9 @@ privileageRouter.patch("/edit/:priveleageId", priveleagesController.editPrivilea
 privileageRouter.get("/all", priveleagesController.getAllPrivileages);
 privileageRouter.patch("/status/:priveleageId", priveleagesController.changePrivileageStatus);
 
+//renders
+privileageRouter.get("/renderroles",priveleagesController.renderAllPrivileages);
+privileageRouter.get("/singleroles",priveleagesController.renderIndividualPrivileage);
+
+
 module.exports = privileageRouter;

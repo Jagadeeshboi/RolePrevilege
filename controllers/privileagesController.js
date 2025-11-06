@@ -152,4 +152,48 @@ module.exports = {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   },
+    renderAllPrivileages: async (req, res) => {
+          try {
+              const allPrivileages=await this.priveleages.find({});
+              if(!allPrivileages)
+              {
+                  req.flash("error","Cannot Fetch Privileages");
+                  return res.redirect("/admin/v1/dashboard");
+              }
+              return res.render("allPrevillege",
+                  {
+                      success: req.flash("error"),
+                      error: req.flash("error"),
+                      allPrivileages
+                  })
+          } catch (error) {
+              console.error(error.message);
+              return res.redirect('/admin/v1/dashboard');
+          }
+      },
+       renderIndividualPrivileage: async (req, res) => {
+          try {
+              const {priveleageId}=req.params;
+              if(!priveleageId)
+              {
+                 req.flash("error","Please Enter Valid Privileage Id.");
+                  return res.redirect("/admin/v1/dashboard");
+              }
+              const singlePrivileage=await this.roles.findById({_id:priveleageId});
+              if(!singlePrivileage)
+              {
+                  req.flash("error","Cannot Fetch the Privileage");
+                  return res.redirect("/admin/v1/dashboard");
+              }
+              return res.render("singlePrevillege",
+                  {
+                      success: req.flash("error"),
+                      error: req.flash("error"),
+                      singlePrivileage
+                  })
+          } catch (error) {
+              console.error(error.message);
+              return res.redirect('/admin/v1/dashboard');
+          }
+        }
 };
