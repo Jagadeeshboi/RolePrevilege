@@ -1,0 +1,55 @@
+{{> headers}}
+<style>
+    .btn-primary {
+    background-color: #464cf8;
+}
+</style>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <div class="card p-3 shadow-sm">
+        <img src="/admin/images/download.png" alt="Profile Image" class="rounded-circle mb-3" width="120" height="120" style="margin-left: 33%;"/>
+        <h5>{{admin.name}}</h5>
+        <p class="text-muted">{{admin.email}}</p>
+
+        <form id="profileImageForm" enctype="multipart/form-data">
+          <input type="file" name="profileImage" class="form-control mb-2" accept="image/*" required />
+          <button class="btn btn-primary w-100">Upload Image</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card p-4 shadow-sm">
+        <h4 class="mb-3">Profile Information</h4>
+        <form id="updateProfileForm"  action="/adminsettings/updateprofile" method="post">
+          <div class="mb-3">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" value="{{admin.name}}" required />
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email" value="{{admin.email}}" required  disabled/>
+          </div>
+          <button class="btn btn-success" style="background-color: #464cf8;" type="submit">Save Changes</button>
+        </form>
+      </div>
+
+      <div class="card p-4 shadow-sm mt-4">
+        <h4 class="mb-3">Change Password</h4>
+        <form id="changePasswordForm" action="/adminsettings/changepassword" method="post">
+          <div class="mb-3">
+            <label>Old Password</label>
+            <input type="password" class="form-control" name="oldPassword" required />
+          </div>
+          <div class="mb-3">
+            <label>New Password</label>
+            <input type="password" class="form-control" name="newPassword" required />
+          </div>
+          <button class="btn btn-warning" type="submit">Change Password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

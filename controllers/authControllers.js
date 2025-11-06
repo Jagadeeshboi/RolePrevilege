@@ -22,6 +22,8 @@ module.exports = {
                 req.flash("error", "password is invalid");
                 return res.redirect('/signin')
             }
+            req.session.organisationadmin=userExist._id;
+            console.log(req.session);
             req.flash("success", "successfully login")
             return res.redirect('/dashboard');
         } catch (error) {

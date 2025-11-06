@@ -98,7 +98,7 @@ module.exports = {
                     req.flash("error","Cannot Fetch Modules");
                     return res.redirect("/admin/v1/dashboard");
                 }
-                return res.render("allModules",
+                return res.render("dashboard",
                     {
                         success: req.flash("error"),
                         error: req.flash("error"),
